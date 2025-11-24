@@ -48,4 +48,40 @@ public class Validation {
         // If all validations pass --> return null (no error)
         return null;
     }
+      public static String extractCapitalLetters(String title) {
+        StringBuilder sb = new StringBuilder();
+
+        for (char ch : title.toCharArray()) {
+            if (Character.isUpperCase(ch)) {
+                sb.append(ch);
+            }
+        }
+        return sb.toString();
+    }
+
+    public static String validateMovieId(String title, String movieId) {
+
+        String expectedPrefix = extractCapitalLetters(title);
+
+        // Rule 1: Prefix must match
+        if (!movieId.startsWith(expectedPrefix)) {
+            return "ERROR: Movie Id letters " + movieId + " are wrong";
+        }
+
+        // Remaining part must be exactly 3 digits
+        String suffix = movieId.substring(expectedPrefix.length());
+        if (suffix.length() != 3 || !suffix.matches("\\d{3}")) {
+            return "ERROR: Movie Id letters " + movieId + " are wrong";
+        }
+
+        // Digits must be unique
+        if (suffix.charAt(0) == suffix.charAt(1) ||
+            suffix.charAt(0) == suffix.charAt(2) ||
+            suffix.charAt(1) == suffix.charAt(2)) {
+            return "ERROR: Movie Id numbers " + movieId + " aren't unique";
+        }
+
+        // Valid
+        return null;
+    }
 }
