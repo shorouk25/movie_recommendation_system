@@ -2,6 +2,14 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
+        
+        String title = "Space fighters";
+        String test = Validation.validateMovieTitle(title);
+        if(test != null){
+            System.out.println(test);
+        } else {
+            System.out.println("Correct title!");
+        }
 
         // Create a set of existing IDs
         Set<String> existingIds = new HashSet<>();
